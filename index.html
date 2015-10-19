@@ -11,13 +11,18 @@
 			}
 		</style>
 		<script>
+		var Drawer;
+		var getData = function() {
+			console.log('Data array is ', Drawer.drawer('getData'));
+		};
 		$(function() {
-			$('#target_element').drawer();
+			Drawer = $('#target_element').drawer();
 		});
 		</script>
 	</head>
 	<body>
 		<h1>Test 4 Texture </h1>
 		<div id="target_element">here we are</div>
+		<button type="button" onclick="getData()">Get data</button>
 	</body>
 </html>
