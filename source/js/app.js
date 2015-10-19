@@ -1,6 +1,7 @@
 (function ($) {
 	var Config = {
-		resolution: 50
+		resolution: 50,
+		sameDelta: 10
 	};
 
 	$.fn.drawer = function(options) {
@@ -13,19 +14,30 @@
 
 		var actions = {
 			drawPoint: function(e) {
+				var point = {x: e.offsetX, y: e.offsetY};
+
+				var lastSaved = _.last($this.data);
+				if (lastSaved != undefined) {
+					if ((Math.abs(point.x - lastSaved.x) < Config.sameDelta) && (Math.abs(point.y - lastSaved.y) < Config.sameDelta)) {
+						return null;
+					}
+				}
+
 				var c = canvas.get(0).getContext('2d');
 				c.fillRect(e.offsetX, e.offsetY, 5, 5);
-				$this.data.push({x: e.offsetX, y: e.offsetY});
+				$this.data.push(point);
+				return point;
 			},
 			trackMouseMoving: function(e) {
 				var prevPoint = _.last($this.data);
-				actions.drawPoint(e);
-				var c = canvas.get(0).getContext('2d');
-				c.beginPath();
-				c.moveTo(prevPoint.x, prevPoint.y);
-				c.lineTo(e.offsetX, e.offsetY);
-				c.stroke();
-				isDrawing = true;
+				if (actions.drawPoint(e) !== null) {
+					var c = canvas.get(0).getContext('2d');
+					c.beginPath();
+					c.moveTo(prevPoint.x, prevPoint.y);
+					c.lineTo(e.offsetX, e.offsetY);
+					c.stroke();
+					isDrawing = true;
+				}
 			}
 		};
 
