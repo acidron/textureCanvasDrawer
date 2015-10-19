@@ -9,7 +9,7 @@ gulp.task("js", function() {
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest("build/"));
 	if (browserSync) {
-		stream.pipe(browserSync.reload());
+		stream.pipe(browserSync.stream());
 	}
 	return stream;
 });
