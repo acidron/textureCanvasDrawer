@@ -9,20 +9,27 @@
 				height: 300px;
 				border:1px solid black;
 			}
+			#target_element2 {
+				width: 500px;
+				height: 300px;
+				border:1px solid red;
+			}
 		</style>
 		<script>
 		var Drawer;
-		var getData = function() {
-			console.log('Data array is ', Drawer.drawer('getData'));
+		var getData = function(i) {
+			console.log('Drawer #' + (i + 1) + '\'s data is ', Drawers[i].drawer('getData'));
 		};
 		$(function() {
-			Drawer = $('#target_element').drawer();
+			Drawers = [$('#target_element').drawer(), $('#target_element2').drawer()];
 		});
 		</script>
 	</head>
 	<body>
 		<h1>Test 4 Texture </h1>
 		<div id="target_element">here we are</div>
-		<button type="button" onclick="getData()">Get data</button>
+		<button type="button" onclick="getData(0)">Get data</button>
+		<div id="target_element2">here we are</div>
+		<button type="button" onclick="getData(1)">Get data</button>
 	</body>
 </html>
