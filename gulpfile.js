@@ -5,7 +5,7 @@ var gulp   = require('gulp'),
 var browserSync = null;
 
 gulp.task("js", function() {
-	var stream = gulp.src("source/js/*.js")
+	var stream = gulp.src(["source/js/*min.js", "source/js/app.js"])
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest("build/"));
 	if (browserSync) {
