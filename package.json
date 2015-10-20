@@ -1,0 +1,11 @@
+{
+    "name": "TexturaCanvasDrawer",
+    "devDependencies": {
+        "gulp": "latest",
+        "gulp-concat": "latest",
+        "browser-sync": "latest"
+    },
+    "scripts": {
+        "build": "gulp js"
+    }
+}
